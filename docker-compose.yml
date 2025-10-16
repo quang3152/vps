@@ -1,0 +1,23 @@
+services:
+  vistream-asr:
+    build: .
+    image: vistream-asr:0.1
+    ports:
+      - "9241:9241"
+    environment:
+      ASR_SR: "16000"
+      CHUNK_MS: "640"
+      AUTO_FINALIZE_AFTER: "15.0"
+      HOST: "0.0.0.0"
+      PORT: "9241"
+      # thêm env nếu ViStreamASR của bạn cần
+      # EXAMPLE_ENV: "value"
+    restart: unless-stopped
+    # Nếu có GPU NVIDIA, bật dòng dưới và dùng requirements CUDA:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities: [gpu]
+    # runtime: nvidia
+    # gpus: all
